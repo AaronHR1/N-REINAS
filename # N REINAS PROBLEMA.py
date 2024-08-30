@@ -1,6 +1,6 @@
 # N REINAS PROBLEMA
 import copy
-tablero = [[0, 0, 0, 0] for _ in range(4)]
+tablero = [[0, 0, 0, 0, 0, 0, 0, 0] for _ in range(8)]
          
 
 
@@ -67,7 +67,7 @@ def confirmar(matriz,valor_insertado):
 def N_reinas(matriz,numero_reinas):
     soluciones=[]
     if numero_reinas == 0:
-        return copy.deepcopy(matriz)
+        return [copy.deepcopy(matriz)]
     
     for i in range(len(matriz)):
         
@@ -79,7 +79,7 @@ def N_reinas(matriz,numero_reinas):
             
             matrizSolucion=N_reinas(nuevaMatriz, numero_reinas - 1)
             if matrizSolucion:
-                soluciones.append(matrizSolucion)
+                soluciones.extend(matrizSolucion)
             
             
     return soluciones
@@ -90,5 +90,6 @@ soluciones = N_reinas(tablero,len(tablero))
 if soluciones:
     print("Se encontró una o mas soluciónes:")
     print(soluciones)
+    print(len(soluciones))
 else:
     print("No se encontró ninguna solución.")
