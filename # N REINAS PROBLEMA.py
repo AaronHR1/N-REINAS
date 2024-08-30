@@ -65,8 +65,9 @@ def confirmar(matriz,valor_insertado):
     
 
 def N_reinas(matriz,numero_reinas):
+    soluciones=[]
     if numero_reinas == 0:
-        return matriz
+        return copy.deepcopy(matriz)
     
     for i in range(len(matriz)):
         
@@ -75,20 +76,19 @@ def N_reinas(matriz,numero_reinas):
         
         if confirmar(nuevaMatriz,nuevoArreglo):
             nuevaMatriz[len(matriz)-numero_reinas][i]=1
-            resultado = N_reinas(nuevaMatriz, numero_reinas - 1)
-            if resultado:
-                return resultado
-        
-        
-        N_reinas(nuevaMatriz,numero_reinas-1)
-    
+            
+            matrizSolucion=N_reinas(nuevaMatriz, numero_reinas - 1)
+            if matrizSolucion:
+                soluciones.append(matrizSolucion)
+            
+            
+    return soluciones
 
 
-solucion = N_reinas(tablero,len(tablero))
+soluciones = N_reinas(tablero,len(tablero))
 
-if solucion:
-    print("Se encontró una solución:")
-    for fila in solucion:
-        print(fila)
+if soluciones:
+    print("Se encontró una o mas soluciónes:")
+    print(soluciones)
 else:
     print("No se encontró ninguna solución.")
